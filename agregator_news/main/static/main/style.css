@@ -1,0 +1,13 @@
+header {
+    display: block;
+    height: 105px; /* Высота шапки */
+}
+.root{
+    font-size: larger;
+}
+    header h1{
+
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
