@@ -3,7 +3,8 @@ import json
 from bs4 import BeautifulSoup
 import requests
 from .models import Posts
-
+from .Newsapi import data
+from .parser import URL
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'agregator_news.settings')
 
@@ -11,7 +12,11 @@ import django
 django.setup()
 
 
-URL = 'https://lenta.ru/rss/top7'
+def api_get_news():
+    for record in data:
+
+        Posts.objects.create(title=record['title'], link=record['url'], date=record['publishedAt'], text=record['content'])
+
 
 def find_news_lenta():
     list = []
@@ -56,3 +61,4 @@ def pull_feed(feed_url, posts_to_show=5):
         pass
     return {'posts': posts}
 '''
+

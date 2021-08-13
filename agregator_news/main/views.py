@@ -6,7 +6,7 @@ from django.template import TemplateDoesNotExist
 from django.http import HttpResponse, Http404
 #from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
-from .Get_news import find_news_lenta
+from .Get_news import find_news_lenta, api_get_news
 from .models import Posts
 from bs4 import BeautifulSoup
 import requests
@@ -35,8 +35,9 @@ def profile(req):
 '''
 
 def News(req):
-    find_news_lenta()
 
+    api_get_news()
+    find_news_lenta()
     news = Posts.objects.all().order_by('-id')[:7]
     return render(req, 'main/index.html', {'news': news})
 
